@@ -51,15 +51,14 @@ class LogSensors:
                 ]
         value.append('@cee:')
 
+        readings = message.pop('readings')
+
         message.update({
             'hostname': value[1],
             'timereported': timereported.astimezone().isoformat(),
             message['name']:
-            reduce(lambda a, b: a + b,
-                   message['readings']) / len(message['readings']),
+            reduce(lambda a, b: a + b, readings) / len(readings),
             })
-
-        del message['readings']
 
         value.append(json.dumps(message))
 
@@ -92,9 +91,9 @@ class LogSensors:
             line = line.decode().split()
             if line and line[0] in ['190', '194']:
                 message['readings'] = [int(line[9])]
-            if line and line[0] == 'Device' and line[1] == 'Model:':
+            elif line and line[0] == 'Device' and line[1] == 'Model:':
                 message['model'] = ' '.join(line[2:])
-            if line and line[0] == 'Serial' and line[1] == 'Number:':
+            elif line and line[0] == 'Serial' and line[1] == 'Number:':
                 message['serial'] = ' '.join(line[2:])
 
         if 'readings' in message:
@@ -153,7 +152,6 @@ class LogSensors:
                             self.load_sensors(),
                             self.send_data(),
                             ]
-
                         )
                     )
             await asyncio.sleep(self.config['INTERVAL'] -
