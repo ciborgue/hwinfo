@@ -1,0 +1,54 @@
+{
+  "INTERVAL": 60,
+  "logger_addr": "elk",
+  "logger_port": 514,
+  "disk_names": [
+    "ssd_disk",
+    "disk0",
+    "disk1",
+    "disk2",
+    "disk3",
+    "disk4",
+    "disk5"
+  ],
+  "disk_devices": {
+    "__default__": "/dev/sda"
+  },
+  "disk_kinds": {
+    "ssd_disk": "megaraid,28",
+    "disk0": "megaraid,29",
+    "disk1": "megaraid,30",
+    "disk2": "megaraid,31",
+    "disk3": "megaraid,32",
+    "disk4": "megaraid,33",
+    "disk5": "megaraid,34"
+  },
+  "sensor_names": [
+    "cpu_fan_rpm",
+    "chassis_fan_rpm",
+    "cpu_0_temp",
+    "cpu_1_temp"
+  ],
+  "sensor_devices": {
+    "cpu_fan_rpm": [
+      "^w83795adg-i2c-0-2f$",
+      "^fan[1-2]$",
+      "^fan\\d+_input$"
+    ],
+    "chassis_fan_rpm": [
+      "^w83795adg-i2c-0-2f$",
+      "^fan[3-6]$",
+      "^fan\\d+_input$"
+    ],
+    "cpu_0_temp": [
+      "^coretemp-isa-0000$",
+      "^Core (0|1|2)$",
+      "^temp\\d+_input$"
+    ],
+    "cpu_1_temp": [
+      "^coretemp-isa-0000$",
+      "^Core (8|9|10)$",
+      "^temp\\d+_input$"
+    ]
+  }
+}
