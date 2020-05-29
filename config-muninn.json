@@ -1,0 +1,35 @@
+{
+  "INTERVAL": 15,
+  "logger_addr": "elk",
+  "logger_port": 514,
+  "disk_names": [
+    "sda",
+    "sdb"
+  ],
+  "disk_devices": {
+    "sda": "/dev/sda",
+    "sdb": "/dev/sdb"
+  },
+  "sensor_names": [
+    "fan_rpm",
+    "cpu_package_temp",
+    "cpu_avg_core_temp"
+  ],
+  "sensor_devices": {
+    "fan_rpm": [
+      "thinkpad-isa-0000",
+      "^fan1$",
+      "^fan1_input$"
+    ],
+    "cpu_package_temp": [
+      "coretemp-isa-0000",
+      "^Package id 0$",
+      "^temp1_input$"
+    ],
+    "cpu_avg_core_temp": [
+      "coretemp-isa-0000",
+      "^Core \\d+$",
+      "^temp\\d+_input$"
+    ]
+  }
+}
